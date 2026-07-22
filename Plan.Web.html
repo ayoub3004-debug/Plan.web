@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLAN.WEB — Des sites web sur devis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#04102b;
+    --bg-panel:#0a1c47;
+    --bg-panel-2:#0e2358;
+    --line:rgba(96,160,255,0.22);
+    --line-soft:rgba(96,160,255,0.12);
+    --text-primary:#eef3fc;
+    --text-soft:#9db1d9;
+    --accent:#ff5a2e;
+    --accent-dark:#e14a20;
+    --cyan:#4fd8ff;
+    --contact-bg:#f2e9dd;
+    --contact-text:#0a1c47;
+    --contact-soft:#5c6a86;
+    --font-display:'Manrope',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+    --font-body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(circle at 15% 8%, rgba(79,216,255,0.10), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(255,90,46,0.08), transparent 35%),
+      var(--bg-deep);
+    color:var(--text-primary); font-family:var(--font-body); line-height:1.55; position:relative;
+  }
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
+  a{color:inherit;}
+
+  .btn{
+    font-family:var(--font-display); font-size:0.92rem; font-weight:700;
+    color:#fff; background:var(--accent);
+    padding:13px 24px; border:none; border-radius:6px;
+    text-decoration:none; cursor:pointer; display:inline-block;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .btn:hover{background:var(--accent-dark); transform:translateY(-1px);}
+  .btn.ghost{background:transparent; color:var(--text-primary); border:1.5px solid var(--line);}
+  .btn.ghost:hover{border-color:var(--cyan); background:transparent;}
+  .btn:focus-visible, a:focus-visible, input:focus-visible, button:focus-visible{outline:2px solid var(--cyan); outline-offset:2px;}
+
+  nav{position:sticky; top:0; z-index:20; background:rgba(4,16,43,0.85); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:18px 32px;}
+  .logo{font-family:var(--font-display); font-weight:800; font-size:1.2rem; letter-spacing:-0.01em; color:var(--text-primary);}
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex; gap:30px; align-items:center;}
+  nav a.navlink{font-size:0.92rem; font-weight:600; text-decoration:none; color:var(--text-soft);}
+  nav a.navlink:hover{color:var(--cyan);}
+
+  /* HERO */
+  header.hero{padding:84px 0 40px;}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:0.78rem; color:var(--cyan);
+    letter-spacing:0.1em; text-transform:uppercase; margin-bottom:18px; font-weight:600;
+  }
+  h1{font-family:var(--font-display); font-weight:800; font-size:clamp(2.3rem,5.2vw,3.8rem); line-height:1.05; max-width:760px; letter-spacing:-0.02em; color:var(--text-primary);}
+  h1 .accent{color:var(--accent);}
+  .hero-sub{max-width:560px; margin-top:22px; color:var(--text-soft); font-size:1.08rem;}
+  .hero-actions{margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;}
+
+  .stack-strip{margin-top:64px; padding-top:32px; border-top:1px solid var(--line);}
+  .stack-strip .label{font-family:var(--font-mono); font-size:0.72rem; color:var(--text-soft); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:18px;}
+  .stack-row{display:flex; gap:36px; flex-wrap:wrap; align-items:center;}
+  .stack-row span{font-family:var(--font-display); font-weight:700; font-size:1.1rem; color:#3d5079;}
+
+  section{padding:76px 0;}
+  section.tinted{background:rgba(255,255,255,0.02);}
+  .sec-head{margin-bottom:44px; max-width:640px;}
+  .sec-num{font-family:var(--font-mono); color:var(--accent); font-size:0.8rem; letter-spacing:0.08em; font-weight:600;}
+  .sec-title{font-family:var(--font-display); font-weight:800; font-size:clamp(1.6rem,3vw,2.3rem); margin-top:10px; letter-spacing:-0.01em; color:var(--text-primary);}
+  .sec-desc{color:var(--text-soft); margin-top:12px; font-size:1rem;}
+
+  /* PATH CARDS (formules) */
+  .paths{display:flex; flex-direction:column; gap:0;}
+  .path{
+    display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
+    padding:44px 0; border-top:1px solid var(--line);
+  }
+  .path:last-child{border-bottom:1px solid var(--line);}
+  @media (max-width:800px){.path{grid-template-columns:1fr; gap:24px;}}
+  .path-num{font-family:var(--font-mono); font-size:0.78rem; color:var(--accent); letter-spacing:0.08em; font-weight:600;}
+  .path-title{font-family:var(--font-display); font-weight:800; font-size:2.1rem; margin-top:10px; color:var(--text-primary); letter-spacing:-0.01em;}
+  .path-desc{color:var(--text-primary); margin-top:12px; font-size:1.12rem; font-weight:600; line-height:1.4; max-width:420px;}
+  .path-price{font-family:var(--font-mono); font-size:0.95rem; font-weight:500; color:var(--text-soft); margin-top:18px;}
+  .path-price small{font-size:0.78rem; color:var(--text-soft); font-family:var(--font-body); font-weight:400;}
+  .path ul{margin-top:16px; display:flex; flex-direction:column; gap:8px;}
+  .path li{font-size:0.9rem; color:var(--text-soft); padding-left:18px; position:relative;}
+  .path li::before{content:"—"; position:absolute; left:0; color:var(--accent);}
+  .path .btn{margin-top:20px;}
+  .path-visual{background:var(--bg-panel); border:1px solid var(--line); border-radius:14px; padding:28px; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;}
+  .path-visual svg{width:100%; height:100%;}
+
+  /* CONFIGURATOR */
+  .configurator{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:16px;
+    padding:36px; display:grid; grid-template-columns:1.3fr 1fr; gap:36px;
+  }
+  @media (max-width:860px){.configurator{grid-template-columns:1fr;}}
+  .config-group{margin-bottom:28px;}
+  .config-label{font-family:var(--font-mono); font-size:0.76rem; color:var(--cyan); letter-spacing:0.08em; text-transform:uppercase; font-weight:600; margin-bottom:14px; display:block;}
+  .base-choice{display:flex; flex-direction:column; gap:10px;}
+  .base-opt{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 16px; border:1.5px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.94rem; font-weight:500;
+    transition:border-color .15s ease, background .15s ease; color:var(--text-primary);
+  }
+  .base-opt:hover{border-color:var(--cyan);}
+  .base-opt.active{border-color:var(--accent); background:rgba(255,90,46,0.08);}
+  .base-opt input{accent-color:var(--accent);}
+  .base-opt .price{font-family:var(--font-mono); color:var(--text-soft);}
+  .addons{display:flex; flex-direction:column; gap:8px;}
+  .addon{
+    display:flex; align-items:center; gap:12px; padding:11px 14px; border-radius:8px;
+    border:1px solid var(--line); cursor:pointer; font-size:0.9rem; color:var(--text-primary);
+  }
+  .addon:hover{border-color:var(--cyan);}
+  .addon input{accent-color:var(--accent); width:16px; height:16px; flex-shrink:0;}
+  .addon .addon-name{flex:1;}
+  .addon .price{font-family:var(--font-mono); color:var(--accent); font-size:0.85rem; font-weight:600;}
+
+  .summary{background:var(--bg-panel-2); color:#fff; border-radius:14px; padding:28px; display:flex; flex-direction:column; border:1px solid var(--line);}
+  .summary-title{font-family:var(--font-mono); font-size:0.76rem; color:var(--cyan); letter-spacing:0.08em; text-transform:uppercase; font-weight:600;}
+  #summary-lines{margin-top:16px; display:flex; flex-direction:column; gap:9px; font-size:0.87rem; flex:1;}
+  #summary-lines .line{display:flex; justify-content:space-between; color:var(--text-soft);}
+  #summary-lines .line span:last-child{font-family:var(--font-mono); color:#fff;}
+  .summary-total{margin-top:20px; padding-top:18px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:baseline;}
+  .summary-total .label{font-family:var(--font-display); font-size:1rem; font-weight:700;}
+  .summary-total .amount{font-family:var(--font-mono); font-size:2.2rem; color:var(--accent); font-weight:600;}
+  .summary .btn{margin-top:22px; text-align:center; width:100%;}
+
+  /* STATS */
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  @media (max-width:800px){.stats{grid-template-columns:repeat(2,1fr);}}
+  .stat{padding:24px 0; border-top:3px solid var(--accent);}
+  .stat .num{font-family:var(--font-display); font-weight:800; font-size:2.4rem; color:var(--text-primary);}
+  .stat .lbl{color:var(--text-soft); font-size:0.9rem; margin-top:6px;}
+
+  /* FAQ */
+  .faq{max-width:760px;}
+  .faq-item{border-top:1px solid var(--line); padding:20px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-q{
+    display:flex; justify-content:space-between; align-items:center; cursor:pointer;
+    font-family:var(--font-display); font-weight:700; font-size:1rem; color:var(--text-primary);
+  }
+  .faq-q .icon{font-family:var(--font-mono); color:var(--accent); font-size:1.1rem; flex-shrink:0; margin-left:16px;}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .faq-a p{color:var(--text-soft); font-size:0.93rem; padding-top:12px; max-width:640px;}
+  .faq-item.open .faq-a{max-height:200px;}
+
+  /* CONTACT — plus clair, tout en bas */
+  .contact-band{background:var(--contact-bg); color:var(--contact-text);}
+  .contact-band .sec-num{color:var(--accent-dark);}
+  .contact-band .sec-title{color:var(--contact-text);}
+  .contact-band .sec-desc{color:var(--contact-soft);}
+  .contact-band .btn{margin-top:8px;}
+
+  footer{background:var(--contact-bg); color:var(--contact-soft); padding:40px 0; border-top:1px solid rgba(10,28,71,0.12);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  footer p{font-size:0.85rem; font-family:var(--font-mono);}
+  footer a{color:var(--contact-text); text-decoration:none; font-weight:600;}
+
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} .btn{transition:none;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">PLAN<span>.</span>WEB</div>
+    <div class="nav-links">
+      <a href="#formules" class="navlink">Formules</a>
+      <a href="#configurateur" class="navlink">Devis</a>
+      <a href="#faq" class="navlink">FAQ</a>
+      <a href="#contact" class="btn">Obtenir un devis</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Cahier des charges &amp; tarifs</div>
+    <h1>Un site web, ça se <span class="accent">dessine</span> avant de se construire.</h1>
+    <p class="hero-sub">Je conçois des sites sur mesure — vitrine, blog ou application avec back-office — et je vous donne le prix de chaque pièce du plan, avant de poser la première ligne de code.</p>
+    <div class="hero-actions">
+      <a href="#configurateur" class="btn">Composer mon site</a>
+      <a href="#formules" class="btn ghost">Voir les formules</a>
+    </div>
+
+    <div class="stack-strip">
+      <div class="label">Technologies utilisées sur chaque projet</div>
+      <div class="stack-row">
+        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span><span>SQL</span><span>React</span><span>Git</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="formules">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">01 — FORMULES</div>
+      <h2 class="sec-title">Trois bases de plan, un point de départ clair</h2>
+      <p class="sec-desc">Chaque formule est un point de départ. Toutes les options du configurateur peuvent s'y ajouter.</p>
+    </div>
+
+    <div class="paths">
+      <div class="path">
+        <div>
+          <div class="path-num">02 — DÉMARRAGE RAPIDE</div>
+          <div class="path-title">Vitrine essentielle</div>
+          <div class="path-desc">Une page unique, pensée pour présenter une activité et convertir un visiteur en contact.</div>
+          <div class="path-price"><small>à partir de</small> 350 €</div>
+          <ul>
+            <li>Design sur mesure, responsive</li>
+            <li>Formulaire de contact</li>
+            <li>Mise en ligne incluse</li>
+          </ul>
+          <a href="#configurateur" class="btn">Composer</a>
+        </div>
+        <div class="path-visual">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma d'une page unique avec en-tête, section héros et formulaire">
+            <rect x="10" y="10" width="180" height="130" rx="6" fill="none" stroke="#4fd8ff" stroke-width="2"/>
+            <rect x="10" y="10" width="180" height="22" rx="6" fill="#4fd8ff" opacity="0.85"/>
+            <rect x="24" y="46" width="152" height="42" rx="4" fill="none" stroke="#ff5a2e" stroke-width="2" stroke-dasharray="5 4"/>
+            <rect x="24" y="98" width="152" height="30" rx="4" fill="none" stroke="#3d5079" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="path">
+        <div>
+          <div class="path-num">03 — LE PLUS CHOISI</div>
+          <div class="path-title">Vitrine complète</div>
+          <div class="path-desc">Jusqu'à 5 pages liées, pour détailler une offre, un parcours ou une actualité.</div>
+          <div class="path-price"><small>à partir de</small> 650 €</div>
+          <ul>
+            <li>Tout ce qui est inclus dans l'essentielle</li>
+            <li>Jusqu'à 5 pages</li>
+            <li>Base SEO (titres, balises, sitemap)</li>
+          </ul>
+          <a href="#configurateur" class="btn">Composer</a>
+        </div>
+        <div class="path-visual">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma de plusieurs pages reliées entre elles">
+            <rect x="10" y="14" width="70" height="50" rx="5" fill="none" stroke="#4fd8ff" stroke-width="2"/>
+            <rect x="10" y="86" width="70" height="50" rx="5" fill="none" stroke="#3d5079" stroke-width="2"/>
+            <rect x="120" y="50" width="70" height="50" rx="5" fill="none" stroke="#ff5a2e" stroke-width="2" stroke-dasharray="5 4"/>
+            <line x1="80" y1="39" x2="120" y2="75" stroke="#4fd8ff" stroke-width="1.5"/>
+            <line x1="80" y1="111" x2="120" y2="75" stroke="#3d5079" stroke-width="1.5"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="path">
+        <div>
+          <div class="path-num">04 — RÉSEAU / APPLICATION</div>
+          <div class="path-title">Sur-mesure / application</div>
+          <div class="path-desc">Un site avec logique métier : comptes, base de données, espace d'administration.</div>
+          <div class="path-price"><small>à partir de</small> 1 200 €</div>
+          <ul>
+            <li>Back-end PHP/MySQL</li>
+            <li>Authentification et espace admin</li>
+            <li>Cahier des charges dédié</li>
+          </ul>
+          <a href="#configurateur" class="btn">Composer</a>
+        </div>
+        <div class="path-visual">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma d'une application avec base de données et espace admin">
+            <rect x="16" y="16" width="60" height="118" rx="5" fill="none" stroke="#4fd8ff" stroke-width="2"/>
+            <rect x="26" y="30" width="40" height="10" rx="2" fill="#4fd8ff" opacity="0.85"/>
+            <ellipse cx="150" cy="35" rx="34" ry="12" fill="none" stroke="#ff5a2e" stroke-width="2"/>
+            <path d="M116 35 v55 a34 12 0 0 0 68 0 v-55" fill="none" stroke="#ff5a2e" stroke-width="2" stroke-dasharray="5 4"/>
+            <line x1="76" y1="60" x2="116" y2="60" stroke="#3d5079" stroke-width="1.5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="configurateur" class="tinted">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">05 — CONFIGURATEUR</div>
+      <h2 class="sec-title">Composez votre site, voyez le prix se dessiner</h2>
+      <p class="sec-desc">Choisissez une base, cochez les options : le total se met à jour en direct. Ce montant sert de base de discussion pour le devis final.</p>
+    </div>
+
+    <div class="configurator">
+      <div>
+        <div class="config-group">
+          <span class="config-label">Base du site</span>
+          <div class="base-choice" id="base-choice">
+            <label class="base-opt active" data-price="350">
+              <span>Vitrine essentielle — 1 page</span>
+              <input type="radio" name="base" value="350" checked>
+              <span class="price">350 €</span>
+            </label>
+            <label class="base-opt" data-price="650">
+              <span>Vitrine complète — jusqu'à 5 pages</span>
+              <input type="radio" name="base" value="650">
+              <span class="price">650 €</span>
+            </label>
+            <label class="base-opt" data-price="1200">
+              <span>Sur-mesure / application</span>
+              <input type="radio" name="base" value="1200">
+              <span class="price">1 200 €</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <span class="config-label">Options à ajouter</span>
+          <div class="addons" id="addons">
+            <label class="addon" data-price="30" data-name="Nom de domaine et configuration">
+              <input type="checkbox"><span class="addon-name">Nom de domaine et configuration</span><span class="price">+ 30 €</span>
+            </label>
+            <label class="addon" data-price="80" data-name="Page supplémentaire">
+              <input type="checkbox"><span class="addon-name">Page supplémentaire</span><span class="price">+ 80 €</span>
+            </label>
+            <label class="addon" data-price="150" data-name="Référencement SEO avancé">
+              <input type="checkbox"><span class="addon-name">Référencement SEO avancé</span><span class="price">+ 150 €</span>
+            </label>
+            <label class="addon" data-price="100" data-name="Logo et identité visuelle">
+              <input type="checkbox"><span class="addon-name">Logo et identité visuelle</span><span class="price">+ 100 €</span>
+            </label>
+            <label class="addon" data-price="250" data-name="Espace d'administration (CMS)">
+              <input type="checkbox"><span class="addon-name">Espace d'administration (CMS)</span><span class="price">+ 250 €</span>
+            </label>
+            <label class="addon" data-price="120" data-name="Langue supplémentaire">
+              <input type="checkbox"><span class="addon-name">Langue supplémentaire</span><span class="price">+ 120 €</span>
+            </label>
+            <label class="addon" data-price="200" data-name="Paiement en ligne">
+              <input type="checkbox"><span class="addon-name">Paiement en ligne</span><span class="price">+ 200 €</span>
+            </label>
+            <label class="addon" data-price="90" data-name="Animations et interactions avancées">
+              <input type="checkbox"><span class="addon-name">Animations et interactions avancées</span><span class="price">+ 90 €</span>
+            </label>
+            <label class="addon" data-price="25" data-name="Maintenance mensuelle">
+              <input type="checkbox"><span class="addon-name">Maintenance mensuelle (par mois)</span><span class="price">+ 25 €/mois</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary">
+        <span class="summary-title">Récapitulatif</span>
+        <div id="summary-lines"></div>
+        <div class="summary-total">
+          <span class="label">Total estimé</span>
+          <span class="amount" id="total-amount">350 €</span>
+        </div>
+        <a href="#contact" class="btn">Demander ce devis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="inclus">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">06 — TOUJOURS INCLUS</div>
+      <h2 class="sec-title">Ce qui ne se facture pas séparément</h2>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">100%</div><div class="lbl">Responsive, sur tous les écrans</div></div>
+      <div class="stat"><div class="num">1</div><div class="lbl">Aller-retour de retouches inclus</div></div>
+      <div class="stat"><div class="num">0€</div><div class="lbl">Mise en ligne, sans surcoût</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl">Code livré, sans dépendance à un abonnement</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="tinted">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">07 — QUESTIONS FRÉQUENTES</div>
+      <h2 class="sec-title">Avant de vous lancer</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">Combien de temps pour livrer un site ? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Comptez 1 à 2 semaines pour une vitrine essentielle, 2 à 4 semaines pour une vitrine complète, et un délai discuté ensemble pour un projet sur-mesure selon sa complexité.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Le nom de domaine et l'hébergement sont-ils compris ? <span class="icon">+</span></div>
+        <div class="faq-a"><p>La mise en ligne est incluse dans chaque formule. Le nom de domaine et sa configuration sont une option à ajouter dans le configurateur si vous n'en avez pas déjà un.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Puis-je modifier mon site moi-même après la livraison ? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Oui si vous prenez l'option espace d'administration (CMS). Sans cette option, le site reste modifiable par mes soins, sur demande.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment se passe le paiement ? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Un acompte est demandé au démarrage du projet, le solde à la livraison. Les modalités exactes sont précisées dans le devis.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">08 — CONTACT</div>
+      <h2 class="sec-title">Discutons de votre projet</h2>
+      <p class="sec-desc">Envoyez le détail de votre idée et la configuration choisie plus haut : vous recevrez un devis précis en retour.</p>
+    </div>
+    <a href="mailto:contact@plan-web.fr?subject=Demande%20de%20devis" class="btn">Écrire un e-mail</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>PLAN.WEB — sites conçus et développés sur devis</p>
+    <p><a href="#configurateur">Composer un site →</a></p>
+  </div>
+</footer>
+
+<script>
+  const baseOptions = document.querySelectorAll('.base-opt');
+  const addonEls = document.querySelectorAll('.addon');
+  const summaryLines = document.getElementById('summary-lines');
+  const totalAmount = document.getElementById('total-amount');
+
+  function formatEUR(n){ return n.toLocaleString('fr-FR') + ' €'; }
+
+  function recalc(){
+    const activeBase = document.querySelector('input[name="base"]:checked');
+    const baseLabel = activeBase.closest('.base-opt');
+    const basePrice = parseInt(activeBase.value, 10);
+    const baseName = baseLabel.querySelector('span:first-child').textContent;
+
+    baseOptions.forEach(opt => opt.classList.toggle('active', opt.querySelector('input').checked));
+
+    let total = basePrice;
+    let lines = [{name: baseName, price: basePrice}];
+
+    addonEls.forEach(addon => {
+      const input = addon.querySelector('input');
+      if(input.checked){
+        const price = parseInt(addon.getAttribute('data-price'), 10);
+        const name = addon.getAttribute('data-name');
+        total += price;
+        lines.push({name, price});
+      }
+    });
+
+    summaryLines.innerHTML = lines.map(l =>
+      `<div class="line"><span>${l.name}</span><span>${formatEUR(l.price)}</span></div>`
+    ).join('');
+
+    totalAmount.textContent = formatEUR(total);
+  }
+
+  baseOptions.forEach(opt => opt.querySelector('input').addEventListener('change', recalc));
+  addonEls.forEach(addon => addon.querySelector('input').addEventListener('change', recalc));
+  recalc();
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>
