@@ -5,170 +5,154 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PLAN.WEB — Des sites web sur devis</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500;1,600&family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-deep:#04102b;
-    --bg-panel:#0a1c47;
-    --bg-panel-2:#0e2358;
-    --line:rgba(96,160,255,0.22);
-    --line-soft:rgba(96,160,255,0.12);
-    --text-primary:#eef3fc;
-    --text-soft:#9db1d9;
-    --accent:#ff5a2e;
-    --accent-dark:#e14a20;
-    --cyan:#4fd8ff;
-    --contact-bg:#f2e9dd;
-    --contact-text:#0a1c47;
-    --contact-soft:#5c6a86;
+    --bg:#faf8f4;
+    --panel:#f2efe8;
+    --ink:#15161b;
+    --ink-soft:#6b6d76;
+    --line:#e3ddd0;
+    --accent:#a97a34;
+    --accent-soft:#c99a55;
+    --dark:#15161b;
+    --dark-soft:#c9c9cf;
     --font-display:'Manrope',sans-serif;
-    --font-mono:'IBM Plex Mono',monospace;
+    --font-serif:'Fraunces',serif;
     --font-body:'Inter',sans-serif;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{
-    background:
-      radial-gradient(circle at 15% 8%, rgba(79,216,255,0.10), transparent 40%),
-      radial-gradient(circle at 85% 30%, rgba(255,90,46,0.08), transparent 35%),
-      var(--bg-deep);
-    color:var(--text-primary); font-family:var(--font-body); line-height:1.55; position:relative;
-  }
-  .wrap{max-width:1120px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
+  body{background:var(--bg); color:var(--ink); font-family:var(--font-body); line-height:1.6;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 32px;}
   a{color:inherit;}
+  em{font-family:var(--font-serif); font-style:italic; font-weight:500; color:var(--accent);}
 
   .btn{
-    font-family:var(--font-display); font-size:0.92rem; font-weight:700;
-    color:#fff; background:var(--accent);
-    padding:13px 24px; border:none; border-radius:6px;
+    font-family:var(--font-display); font-size:0.9rem; font-weight:700;
+    color:#fff; background:var(--ink);
+    padding:14px 26px; border:1px solid var(--ink); border-radius:100px;
     text-decoration:none; cursor:pointer; display:inline-block;
-    transition:background .15s ease, transform .15s ease;
+    transition:background .15s ease, color .15s ease, transform .15s ease;
   }
-  .btn:hover{background:var(--accent-dark); transform:translateY(-1px);}
-  .btn.ghost{background:transparent; color:var(--text-primary); border:1.5px solid var(--line);}
-  .btn.ghost:hover{border-color:var(--cyan); background:transparent;}
-  .btn:focus-visible, a:focus-visible, input:focus-visible, button:focus-visible{outline:2px solid var(--cyan); outline-offset:2px;}
+  .btn:hover{background:transparent; color:var(--ink); transform:translateY(-1px);}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--line);}
+  .btn.ghost:hover{border-color:var(--ink);}
+  .btn.on-dark{background:#fff; color:var(--dark); border-color:#fff;}
+  .btn.on-dark:hover{background:transparent; color:#fff;}
+  .btn:focus-visible, a:focus-visible, input:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
-  nav{position:sticky; top:0; z-index:20; background:rgba(4,16,43,0.85); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
-  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:18px 32px;}
-  .logo{font-family:var(--font-display); font-weight:800; font-size:1.2rem; letter-spacing:-0.01em; color:var(--text-primary);}
-  .logo span{color:var(--accent);}
-  .nav-links{display:flex; gap:30px; align-items:center;}
-  nav a.navlink{font-size:0.92rem; font-weight:600; text-decoration:none; color:var(--text-soft);}
-  nav a.navlink:hover{color:var(--cyan);}
+  nav{position:sticky; top:0; z-index:20; background:rgba(250,248,244,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:20px 32px;}
+  .logo{font-family:var(--font-display); font-weight:800; font-size:1.2rem; letter-spacing:-0.01em;}
+  .logo span{font-family:var(--font-serif); font-style:italic; font-weight:500; color:var(--accent);}
+  .nav-links{display:flex; gap:32px; align-items:center;}
+  nav a.navlink{font-size:0.92rem; font-weight:500; text-decoration:none; color:var(--ink-soft);}
+  nav a.navlink:hover{color:var(--ink);}
 
-  /* HERO */
-  header.hero{padding:84px 0 40px;}
+  header.hero{padding:100px 0 50px;}
   .eyebrow{
-    font-family:var(--font-mono); font-size:0.78rem; color:var(--cyan);
-    letter-spacing:0.1em; text-transform:uppercase; margin-bottom:18px; font-weight:600;
+    font-family:var(--font-body); font-size:0.82rem; color:var(--ink-soft);
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:20px; font-weight:600;
   }
-  h1{font-family:var(--font-display); font-weight:800; font-size:clamp(2.3rem,5.2vw,3.8rem); line-height:1.05; max-width:760px; letter-spacing:-0.02em; color:var(--text-primary);}
-  h1 .accent{color:var(--accent);}
-  .hero-sub{max-width:560px; margin-top:22px; color:var(--text-soft); font-size:1.08rem;}
-  .hero-actions{margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;}
+  .eyebrow::before{content:"— "; color:var(--accent);}
+  h1{font-family:var(--font-display); font-weight:800; font-size:clamp(2.3rem,5vw,3.7rem); line-height:1.12; max-width:820px; letter-spacing:-0.02em; color:var(--ink);}
+  .hero-sub{max-width:560px; margin-top:24px; color:var(--ink-soft); font-size:1.1rem;}
+  .hero-actions{margin-top:34px; display:flex; gap:14px; flex-wrap:wrap; align-items:center;}
+  .hero-note{font-size:0.85rem; color:var(--ink-soft);}
 
-  .stack-strip{margin-top:64px; padding-top:32px; border-top:1px solid var(--line);}
-  .stack-strip .label{font-family:var(--font-mono); font-size:0.72rem; color:var(--text-soft); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:18px;}
+  .stack-strip{margin-top:70px; padding-top:30px; border-top:1px solid var(--line);}
+  .stack-strip .label{font-size:0.78rem; color:var(--ink-soft); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:18px; font-weight:600;}
   .stack-row{display:flex; gap:36px; flex-wrap:wrap; align-items:center;}
-  .stack-row span{font-family:var(--font-display); font-weight:700; font-size:1.1rem; color:#3d5079;}
+  .stack-row span{font-family:var(--font-display); font-weight:700; font-size:1.05rem; color:#c9c2b2;}
 
-  section{padding:76px 0;}
-  section.tinted{background:rgba(255,255,255,0.02);}
-  .sec-head{margin-bottom:44px; max-width:640px;}
-  .sec-num{font-family:var(--font-mono); color:var(--accent); font-size:0.8rem; letter-spacing:0.08em; font-weight:600;}
-  .sec-title{font-family:var(--font-display); font-weight:800; font-size:clamp(1.6rem,3vw,2.3rem); margin-top:10px; letter-spacing:-0.01em; color:var(--text-primary);}
-  .sec-desc{color:var(--text-soft); margin-top:12px; font-size:1rem;}
+  section{padding:80px 0;}
+  section.tinted{background:var(--panel);}
+  .sec-head{margin-bottom:46px; max-width:640px;}
+  .sec-num{font-size:0.85rem; color:var(--ink-soft); letter-spacing:0.04em; font-weight:600;}
+  .sec-title{font-family:var(--font-display); font-weight:800; font-size:clamp(1.6rem,3vw,2.3rem); margin-top:10px; letter-spacing:-0.01em; color:var(--ink);}
+  .sec-desc{color:var(--ink-soft); margin-top:14px; font-size:1.02rem;}
 
-  /* PATH CARDS (formules) */
   .paths{display:flex; flex-direction:column; gap:0;}
-  .path{
-    display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
-    padding:44px 0; border-top:1px solid var(--line);
-  }
+  .path{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; padding:48px 0; border-top:1px solid var(--line);}
   .path:last-child{border-bottom:1px solid var(--line);}
-  @media (max-width:800px){.path{grid-template-columns:1fr; gap:24px;}}
-  .path-num{font-family:var(--font-mono); font-size:0.78rem; color:var(--accent); letter-spacing:0.08em; font-weight:600;}
-  .path-title{font-family:var(--font-display); font-weight:800; font-size:2.1rem; margin-top:10px; color:var(--text-primary); letter-spacing:-0.01em;}
-  .path-desc{color:var(--text-primary); margin-top:12px; font-size:1.12rem; font-weight:600; line-height:1.4; max-width:420px;}
-  .path-price{font-family:var(--font-mono); font-size:0.95rem; font-weight:500; color:var(--text-soft); margin-top:18px;}
-  .path-price small{font-size:0.78rem; color:var(--text-soft); font-family:var(--font-body); font-weight:400;}
-  .path ul{margin-top:16px; display:flex; flex-direction:column; gap:8px;}
-  .path li{font-size:0.9rem; color:var(--text-soft); padding-left:18px; position:relative;}
-  .path li::before{content:"—"; position:absolute; left:0; color:var(--accent);}
-  .path .btn{margin-top:20px;}
-  .path-visual{background:var(--bg-panel); border:1px solid var(--line); border-radius:14px; padding:28px; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;}
+  @media (max-width:800px){.path{grid-template-columns:1fr; gap:26px;}}
+  .path-num{font-family:var(--font-body); font-size:0.8rem; color:var(--accent); letter-spacing:0.04em; font-weight:700;}
+  .path-title{font-family:var(--font-display); font-weight:800; font-size:2.1rem; margin-top:10px; color:var(--ink); letter-spacing:-0.01em;}
+  .path-desc{color:var(--ink); margin-top:12px; font-size:1.12rem; font-weight:500; line-height:1.45; max-width:420px;}
+  .path-price{font-family:var(--font-body); font-size:0.95rem; font-weight:500; color:var(--ink-soft); margin-top:18px;}
+  .path-price b{font-family:var(--font-display); font-weight:800; color:var(--ink); font-size:1.3rem;}
+  .path ul{margin-top:18px; display:flex; flex-direction:column; gap:9px;}
+  .path li{font-size:0.94rem; color:var(--ink-soft); padding-left:20px; position:relative;}
+  .path li::before{content:"·"; position:absolute; left:2px; color:var(--accent); font-weight:800; font-size:1.3rem; line-height:0.8;}
+  .path .btn{margin-top:22px;}
+  .path-visual{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:30px; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;}
   .path-visual svg{width:100%; height:100%;}
 
-  /* CONFIGURATOR */
   .configurator{
-    background:var(--bg-panel); border:1px solid var(--line); border-radius:16px;
-    padding:36px; display:grid; grid-template-columns:1.3fr 1fr; gap:36px;
+    background:var(--bg); border:1px solid var(--line); border-radius:20px;
+    padding:38px; display:grid; grid-template-columns:1.3fr 1fr; gap:38px;
   }
   @media (max-width:860px){.configurator{grid-template-columns:1fr;}}
-  .config-group{margin-bottom:28px;}
-  .config-label{font-family:var(--font-mono); font-size:0.76rem; color:var(--cyan); letter-spacing:0.08em; text-transform:uppercase; font-weight:600; margin-bottom:14px; display:block;}
+  .config-group{margin-bottom:30px;}
+  .config-label{font-size:0.78rem; color:var(--accent); letter-spacing:0.06em; text-transform:uppercase; font-weight:700; margin-bottom:16px; display:block;}
   .base-choice{display:flex; flex-direction:column; gap:10px;}
   .base-opt{
     display:flex; align-items:center; justify-content:space-between;
-    padding:14px 16px; border:1.5px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.94rem; font-weight:500;
-    transition:border-color .15s ease, background .15s ease; color:var(--text-primary);
+    padding:15px 18px; border:1px solid var(--line); border-radius:12px; cursor:pointer; font-size:0.95rem; font-weight:500;
+    transition:border-color .15s ease, background .15s ease;
   }
-  .base-opt:hover{border-color:var(--cyan);}
-  .base-opt.active{border-color:var(--accent); background:rgba(255,90,46,0.08);}
-  .base-opt input{accent-color:var(--accent);}
-  .base-opt .price{font-family:var(--font-mono); color:var(--text-soft);}
+  .base-opt:hover{border-color:var(--ink-soft);}
+  .base-opt.active{border-color:var(--ink); background:var(--panel);}
+  .base-opt input{accent-color:var(--ink);}
+  .base-opt .price{font-family:var(--font-display); font-weight:700; color:var(--ink-soft);}
   .addons{display:flex; flex-direction:column; gap:8px;}
   .addon{
-    display:flex; align-items:center; gap:12px; padding:11px 14px; border-radius:8px;
-    border:1px solid var(--line); cursor:pointer; font-size:0.9rem; color:var(--text-primary);
+    display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:12px;
+    border:1px solid var(--line); cursor:pointer; font-size:0.9rem;
   }
-  .addon:hover{border-color:var(--cyan);}
-  .addon input{accent-color:var(--accent); width:16px; height:16px; flex-shrink:0;}
+  .addon:hover{border-color:var(--ink-soft);}
+  .addon input{accent-color:var(--ink); width:16px; height:16px; flex-shrink:0;}
   .addon .addon-name{flex:1;}
-  .addon .price{font-family:var(--font-mono); color:var(--accent); font-size:0.85rem; font-weight:600;}
+  .addon .price{font-family:var(--font-display); color:var(--accent); font-size:0.85rem; font-weight:700;}
 
-  .summary{background:var(--bg-panel-2); color:#fff; border-radius:14px; padding:28px; display:flex; flex-direction:column; border:1px solid var(--line);}
-  .summary-title{font-family:var(--font-mono); font-size:0.76rem; color:var(--cyan); letter-spacing:0.08em; text-transform:uppercase; font-weight:600;}
-  #summary-lines{margin-top:16px; display:flex; flex-direction:column; gap:9px; font-size:0.87rem; flex:1;}
-  #summary-lines .line{display:flex; justify-content:space-between; color:var(--text-soft);}
-  #summary-lines .line span:last-child{font-family:var(--font-mono); color:#fff;}
-  .summary-total{margin-top:20px; padding-top:18px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:baseline;}
+  .summary{background:var(--dark); color:#fff; border-radius:16px; padding:30px; display:flex; flex-direction:column;}
+  .summary-title{font-size:0.78rem; color:var(--dark-soft); letter-spacing:0.06em; text-transform:uppercase; font-weight:700;}
+  #summary-lines{margin-top:18px; display:flex; flex-direction:column; gap:9px; font-size:0.87rem; flex:1;}
+  #summary-lines .line{display:flex; justify-content:space-between; color:var(--dark-soft);}
+  #summary-lines .line span:last-child{font-family:var(--font-display); font-weight:600; color:#fff;}
+  .summary-total{margin-top:22px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.15); display:flex; justify-content:space-between; align-items:baseline;}
   .summary-total .label{font-family:var(--font-display); font-size:1rem; font-weight:700;}
-  .summary-total .amount{font-family:var(--font-mono); font-size:2.2rem; color:var(--accent); font-weight:600;}
+  .summary-total .amount{font-family:var(--font-display); font-size:2.2rem; color:var(--accent-soft); font-weight:800;}
   .summary .btn{margin-top:22px; text-align:center; width:100%;}
+  .summary .btn.on-dark{border:1px solid #fff;}
 
-  /* STATS */
-  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:26px;}
   @media (max-width:800px){.stats{grid-template-columns:repeat(2,1fr);}}
-  .stat{padding:24px 0; border-top:3px solid var(--accent);}
-  .stat .num{font-family:var(--font-display); font-weight:800; font-size:2.4rem; color:var(--text-primary);}
-  .stat .lbl{color:var(--text-soft); font-size:0.9rem; margin-top:6px;}
+  .stat{padding:26px 0; border-top:1px solid var(--ink);}
+  .stat .num{font-family:var(--font-display); font-weight:800; font-size:2.5rem; color:var(--ink);}
+  .stat .lbl{color:var(--ink-soft); font-size:0.9rem; margin-top:8px;}
 
-  /* FAQ */
   .faq{max-width:760px;}
-  .faq-item{border-top:1px solid var(--line); padding:20px 0;}
+  .faq-item{border-top:1px solid var(--line); padding:22px 0;}
   .faq-item:last-child{border-bottom:1px solid var(--line);}
-  .faq-q{
-    display:flex; justify-content:space-between; align-items:center; cursor:pointer;
-    font-family:var(--font-display); font-weight:700; font-size:1rem; color:var(--text-primary);
-  }
-  .faq-q .icon{font-family:var(--font-mono); color:var(--accent); font-size:1.1rem; flex-shrink:0; margin-left:16px;}
+  .faq-q{display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-family:var(--font-display); font-weight:700; font-size:1.02rem;}
+  .faq-q .icon{font-family:var(--font-body); color:var(--accent); font-size:1.2rem; flex-shrink:0; margin-left:16px;}
   .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
-  .faq-a p{color:var(--text-soft); font-size:0.93rem; padding-top:12px; max-width:640px;}
+  .faq-a p{color:var(--ink-soft); font-size:0.95rem; padding-top:12px; max-width:640px;}
   .faq-item.open .faq-a{max-height:200px;}
 
-  /* CONTACT — plus clair, tout en bas */
-  .contact-band{background:var(--contact-bg); color:var(--contact-text);}
-  .contact-band .sec-num{color:var(--accent-dark);}
-  .contact-band .sec-title{color:var(--contact-text);}
-  .contact-band .sec-desc{color:var(--contact-soft);}
+  .contact-band{background:var(--dark); color:#fff;}
+  .contact-band .sec-num{color:var(--dark-soft);}
+  .contact-band .sec-num::before{color:var(--accent-soft);}
+  .contact-band .sec-title{color:#fff;}
+  .contact-band .sec-desc{color:var(--dark-soft);}
   .contact-band .btn{margin-top:8px;}
 
-  footer{background:var(--contact-bg); color:var(--contact-soft); padding:40px 0; border-top:1px solid rgba(10,28,71,0.12);}
+  footer{background:var(--dark); color:var(--dark-soft); padding:44px 0; border-top:1px solid rgba(255,255,255,0.1);}
   footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
-  footer p{font-size:0.85rem; font-family:var(--font-mono);}
-  footer a{color:var(--contact-text); text-decoration:none; font-weight:600;}
+  footer p{font-size:0.85rem;}
+  footer a{color:#fff; text-decoration:none; font-weight:600;}
 
   @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} .btn{transition:none;} }
 </style>
@@ -177,7 +161,7 @@
 
 <nav>
   <div class="wrap">
-    <div class="logo">PLAN<span>.</span>WEB</div>
+    <div class="logo">PLAN<span>.web</span></div>
     <div class="nav-links">
       <a href="#formules" class="navlink">Formules</a>
       <a href="#configurateur" class="navlink">Devis</a>
@@ -190,13 +174,12 @@
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Cahier des charges &amp; tarifs</div>
-    <h1>Un site web, ça se <span class="accent">dessine</span> avant de se construire.</h1>
+    <h1>Un site web, ça se <em>dessine</em> avant de se construire.</h1>
     <p class="hero-sub">Je conçois des sites sur mesure — vitrine, blog ou application avec back-office — et je vous donne le prix de chaque pièce du plan, avant de poser la première ligne de code.</p>
     <div class="hero-actions">
       <a href="#configurateur" class="btn">Composer mon site</a>
       <a href="#formules" class="btn ghost">Voir les formules</a>
     </div>
-
     <div class="stack-strip">
       <div class="label">Technologies utilisées sur chaque projet</div>
       <div class="stack-row">
@@ -209,18 +192,18 @@
 <section id="formules">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">01 — FORMULES</div>
-      <h2 class="sec-title">Trois bases de plan, un point de départ clair</h2>
+      <div class="sec-num">— Formules</div>
+      <h2 class="sec-title">Trois bases de plan, un point de départ <em>clair</em></h2>
       <p class="sec-desc">Chaque formule est un point de départ. Toutes les options du configurateur peuvent s'y ajouter.</p>
     </div>
 
     <div class="paths">
       <div class="path">
         <div>
-          <div class="path-num">02 — DÉMARRAGE RAPIDE</div>
+          <div class="path-num">01 · Démarrage rapide</div>
           <div class="path-title">Vitrine essentielle</div>
           <div class="path-desc">Une page unique, pensée pour présenter une activité et convertir un visiteur en contact.</div>
-          <div class="path-price"><small>à partir de</small> 350 €</div>
+          <div class="path-price">à partir de <b>350 €</b></div>
           <ul>
             <li>Design sur mesure, responsive</li>
             <li>Formulaire de contact</li>
@@ -230,20 +213,20 @@
         </div>
         <div class="path-visual">
           <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma d'une page unique avec en-tête, section héros et formulaire">
-            <rect x="10" y="10" width="180" height="130" rx="6" fill="none" stroke="#4fd8ff" stroke-width="2"/>
-            <rect x="10" y="10" width="180" height="22" rx="6" fill="#4fd8ff" opacity="0.85"/>
-            <rect x="24" y="46" width="152" height="42" rx="4" fill="none" stroke="#ff5a2e" stroke-width="2" stroke-dasharray="5 4"/>
-            <rect x="24" y="98" width="152" height="30" rx="4" fill="none" stroke="#3d5079" stroke-width="2"/>
+            <rect x="10" y="10" width="180" height="130" rx="8" fill="none" stroke="#15161b" stroke-width="1.5"/>
+            <rect x="10" y="10" width="180" height="22" rx="8" fill="#15161b"/>
+            <rect x="24" y="46" width="152" height="42" rx="4" fill="none" stroke="#a97a34" stroke-width="1.5" stroke-dasharray="5 4"/>
+            <rect x="24" y="98" width="152" height="30" rx="4" fill="none" stroke="#c9c2b2" stroke-width="1.5"/>
           </svg>
         </div>
       </div>
 
       <div class="path">
         <div>
-          <div class="path-num">03 — LE PLUS CHOISI</div>
+          <div class="path-num">02 · Le plus choisi</div>
           <div class="path-title">Vitrine complète</div>
           <div class="path-desc">Jusqu'à 5 pages liées, pour détailler une offre, un parcours ou une actualité.</div>
-          <div class="path-price"><small>à partir de</small> 650 €</div>
+          <div class="path-price">à partir de <b>650 €</b></div>
           <ul>
             <li>Tout ce qui est inclus dans l'essentielle</li>
             <li>Jusqu'à 5 pages</li>
@@ -253,21 +236,21 @@
         </div>
         <div class="path-visual">
           <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma de plusieurs pages reliées entre elles">
-            <rect x="10" y="14" width="70" height="50" rx="5" fill="none" stroke="#4fd8ff" stroke-width="2"/>
-            <rect x="10" y="86" width="70" height="50" rx="5" fill="none" stroke="#3d5079" stroke-width="2"/>
-            <rect x="120" y="50" width="70" height="50" rx="5" fill="none" stroke="#ff5a2e" stroke-width="2" stroke-dasharray="5 4"/>
-            <line x1="80" y1="39" x2="120" y2="75" stroke="#4fd8ff" stroke-width="1.5"/>
-            <line x1="80" y1="111" x2="120" y2="75" stroke="#3d5079" stroke-width="1.5"/>
+            <rect x="10" y="14" width="70" height="50" rx="6" fill="none" stroke="#15161b" stroke-width="1.5"/>
+            <rect x="10" y="86" width="70" height="50" rx="6" fill="none" stroke="#c9c2b2" stroke-width="1.5"/>
+            <rect x="120" y="50" width="70" height="50" rx="6" fill="none" stroke="#a97a34" stroke-width="1.5" stroke-dasharray="5 4"/>
+            <line x1="80" y1="39" x2="120" y2="75" stroke="#15161b" stroke-width="1.2"/>
+            <line x1="80" y1="111" x2="120" y2="75" stroke="#c9c2b2" stroke-width="1.2"/>
           </svg>
         </div>
       </div>
 
       <div class="path">
         <div>
-          <div class="path-num">04 — RÉSEAU / APPLICATION</div>
+          <div class="path-num">03 · Réseau / application</div>
           <div class="path-title">Sur-mesure / application</div>
           <div class="path-desc">Un site avec logique métier : comptes, base de données, espace d'administration.</div>
-          <div class="path-price"><small>à partir de</small> 1 200 €</div>
+          <div class="path-price">à partir de <b>1 200 €</b></div>
           <ul>
             <li>Back-end PHP/MySQL</li>
             <li>Authentification et espace admin</li>
@@ -277,11 +260,11 @@
         </div>
         <div class="path-visual">
           <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma d'une application avec base de données et espace admin">
-            <rect x="16" y="16" width="60" height="118" rx="5" fill="none" stroke="#4fd8ff" stroke-width="2"/>
-            <rect x="26" y="30" width="40" height="10" rx="2" fill="#4fd8ff" opacity="0.85"/>
-            <ellipse cx="150" cy="35" rx="34" ry="12" fill="none" stroke="#ff5a2e" stroke-width="2"/>
-            <path d="M116 35 v55 a34 12 0 0 0 68 0 v-55" fill="none" stroke="#ff5a2e" stroke-width="2" stroke-dasharray="5 4"/>
-            <line x1="76" y1="60" x2="116" y2="60" stroke="#3d5079" stroke-width="1.5"/>
+            <rect x="16" y="16" width="60" height="118" rx="6" fill="none" stroke="#15161b" stroke-width="1.5"/>
+            <rect x="26" y="30" width="40" height="10" rx="2" fill="#15161b"/>
+            <ellipse cx="150" cy="35" rx="34" ry="12" fill="none" stroke="#a97a34" stroke-width="1.5"/>
+            <path d="M116 35 v55 a34 12 0 0 0 68 0 v-55" fill="none" stroke="#a97a34" stroke-width="1.5" stroke-dasharray="5 4"/>
+            <line x1="76" y1="60" x2="116" y2="60" stroke="#c9c2b2" stroke-width="1.2"/>
           </svg>
         </div>
       </div>
@@ -292,8 +275,8 @@
 <section id="configurateur" class="tinted">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">05 — CONFIGURATEUR</div>
-      <h2 class="sec-title">Composez votre site, voyez le prix se dessiner</h2>
+      <div class="sec-num">— Configurateur</div>
+      <h2 class="sec-title">Composez votre site, voyez le prix se <em>dessiner</em></h2>
       <p class="sec-desc">Choisissez une base, cochez les options : le total se met à jour en direct. Ce montant sert de base de discussion pour le devis final.</p>
     </div>
 
@@ -361,7 +344,7 @@
           <span class="label">Total estimé</span>
           <span class="amount" id="total-amount">350 €</span>
         </div>
-        <a href="#contact" class="btn">Demander ce devis</a>
+        <a href="#contact" class="btn on-dark">Demander ce devis</a>
       </div>
     </div>
   </div>
@@ -370,8 +353,8 @@
 <section id="inclus">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">06 — TOUJOURS INCLUS</div>
-      <h2 class="sec-title">Ce qui ne se facture pas séparément</h2>
+      <div class="sec-num">— Toujours inclus</div>
+      <h2 class="sec-title">Ce qui ne se facture pas <em>séparément</em></h2>
     </div>
     <div class="stats">
       <div class="stat"><div class="num">100%</div><div class="lbl">Responsive, sur tous les écrans</div></div>
@@ -385,8 +368,8 @@
 <section id="faq" class="tinted">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">07 — QUESTIONS FRÉQUENTES</div>
-      <h2 class="sec-title">Avant de vous lancer</h2>
+      <div class="sec-num">— Questions fréquentes</div>
+      <h2 class="sec-title">Avant de vous <em>lancer</em></h2>
     </div>
     <div class="faq">
       <div class="faq-item">
@@ -412,11 +395,11 @@
 <section id="contact" class="contact-band">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">08 — CONTACT</div>
-      <h2 class="sec-title">Discutons de votre projet</h2>
+      <div class="sec-num">— Contact</div>
+      <h2 class="sec-title">Discutons de votre <em>projet</em></h2>
       <p class="sec-desc">Envoyez le détail de votre idée et la configuration choisie plus haut : vous recevrez un devis précis en retour.</p>
     </div>
-    <a href="mailto:contact@plan-web.fr?subject=Demande%20de%20devis" class="btn">Écrire un e-mail</a>
+    <a href="mailto:contact@plan-web.fr?subject=Demande%20de%20devis" class="btn on-dark">Écrire un e-mail</a>
   </div>
 </section>
 
