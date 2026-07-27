@@ -145,6 +145,12 @@
     opacity:0.35;
     pointer-events:none;
   }
+  .hero-spotlight{
+    position:absolute;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(320px circle at var(--mx,50%) var(--my,20%), rgba(232,181,100,0.10), transparent 70%);
+    transition:background .1s ease;
+  }
+  @media(max-width:900px){.hero-spotlight{display:none;}}
   .hero-grid{
     display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:center;
     position:relative;z-index:1;
@@ -245,6 +251,65 @@
   }
   .stat-label{font-size:0.82rem;color:var(--ink-dim);margin-top:8px;}
 
+  /* ---------- TECH STRIP ---------- */
+  .tech-strip{padding:0 0 56px;}
+  .tech-track{
+    display:flex;align-items:center;gap:14px;
+    animation: scroll-left 22s linear infinite;
+    width:max-content;
+  }
+  .tech-badge{
+    font-family:'IBM Plex Mono',monospace;font-size:0.82rem;
+    border:1px solid var(--line);border-radius:999px;
+    padding:9px 20px;color:var(--ink-dim);white-space:nowrap;
+  }
+  .tech-label{
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--ink-dim);text-align:center;margin-bottom:18px;
+  }
+
+  /* ---------- FOOTER CTA ---------- */
+  .footer-cta{
+    text-align:center;padding:70px 0;border-top:1px solid var(--line);
+  }
+  .footer-cta h2{font-size:clamp(1.6rem,3.4vw,2.2rem);margin-bottom:18px;}
+  .footer-cta .btn{margin-top:6px;}
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox-overlay{
+    display:none;position:fixed;inset:0;z-index:90;
+    background:rgba(8,6,14,0.78);backdrop-filter:blur(6px);
+    align-items:center;justify-content:center;padding:24px;
+  }
+  .lightbox-overlay.open{display:flex;}
+  .lightbox-box{
+    max-width:560px;width:100%;
+    background:var(--bg-soft);border:1px solid var(--line);border-radius:20px;
+    overflow:hidden;
+    animation: lightbox-in .25s ease;
+  }
+  @keyframes lightbox-in{
+    from{opacity:0;transform:translateY(16px) scale(0.98);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+  .lightbox-visual{
+    height:200px;position:relative;display:flex;align-items:center;justify-content:center;
+  }
+  .lightbox-visual .thumb-icon{width:64px;height:64px;position:static;transform:none;color:rgba(255,255,255,0.25);}
+  .lightbox-close{
+    position:absolute;top:16px;right:16px;
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(0,0,0,0.35);border:none;color:#fff;
+    font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  }
+  .lightbox-body{padding:26px 28px 30px;}
+  .lightbox-body .thumb-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--amber);
+    border:1px solid var(--amber-dim);border-radius:999px;padding:4px 12px;
+  }
+  .lightbox-body h3{font-family:'Fraunces',serif;font-size:1.4rem;margin:14px 0 12px;}
+  .lightbox-body p{color:var(--ink-dim);font-size:0.95rem;margin-bottom:20px;}
+
   section{padding:100px 0;}
   .section-head{max-width:640px;margin-bottom:56px;}
   .section-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-top:14px;}
@@ -285,7 +350,18 @@
     border-radius:18px;
     overflow:hidden;
     background:var(--bg-soft);
+    cursor:pointer;
+    transform:perspective(800px) rotateX(0deg) rotateY(0deg) scale(1);
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    will-change:transform;
   }
+  .work-card:hover{
+    box-shadow:0 20px 40px -16px rgba(0,0,0,0.5);
+    border-color:var(--amber-dim);
+  }
+  .work-card .work-thumb-body .thumb-tag{transition:transform .25s ease;}
+  .work-card:hover .thumb-icon{opacity:0.28;transform:translate(-50%,-50%) scale(1.06);}
+  .thumb-icon{transition:opacity .25s ease, transform .25s ease;}
   .work-thumb{
     height:190px;
     position:relative;
@@ -645,7 +721,8 @@
   <div class="drawer-overlay" id="drawer-overlay"></div>
 </header>
 
-<section class="hero wrap">
+<section class="hero wrap" id="hero-section">
+  <div class="hero-spotlight" id="hero-spotlight"></div>
   <div class="hero-grid">
     <div>
       <span class="eyebrow">Studio web indépendant</span>
@@ -686,6 +763,22 @@
     <span>·</span><span>Un seul projet à la fois</span>
   </div>
 </div>
+
+<section class="tech-strip">
+  <div class="wrap reveal">
+    <p class="tech-label">Technologies utilisées sur vos projets</p>
+    <div style="overflow:hidden;">
+      <div class="tech-track">
+        <span class="tech-badge">HTML</span><span class="tech-badge">CSS</span><span class="tech-badge">JavaScript</span>
+        <span class="tech-badge">PHP</span><span class="tech-badge">SQL</span><span class="tech-badge">React</span>
+        <span class="tech-badge">Git</span>
+        <span class="tech-badge">HTML</span><span class="tech-badge">CSS</span><span class="tech-badge">JavaScript</span>
+        <span class="tech-badge">PHP</span><span class="tech-badge">SQL</span><span class="tech-badge">React</span>
+        <span class="tech-badge">Git</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="stats-strip">
   <div class="wrap reveal">
@@ -733,7 +826,11 @@
       <p>Un aperçu de ce qui a déjà été livré.</p>
     </div>
     <div class="work-grid">
-      <div class="work-card">
+      <div class="work-card" data-lightbox
+           data-title="O Korner"
+           data-tag="Restaurant"
+           data-desc="Site vitrine pour un restaurant à Noyal-sur-Vilaine : menu interactif organisé en 6 catégories, ambiance sombre et dorée avec la police Playfair Display, et une carte Google Maps intégrée pour l'accès."
+           data-thumb="thumb-okorner">
         <div class="work-thumb thumb-okorner">
           <div class="browser-bar"><span></span><span></span><span></span></div>
           <svg class="thumb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2v8a2 2 0 0 0 2 2v10M6 2v6M9 2v6"/><path d="M15 2c-1.5 0-2 2-2 5s.5 5 2 5v10"/></svg>
@@ -745,7 +842,11 @@
           <!-- Ajoute le lien vers le site en ligne dès qu'il est déployé -->
         </div>
       </div>
-      <div class="work-card">
+      <div class="work-card" data-lightbox
+           data-title="ParkEtudiant Orléans"
+           data-tag="Application web"
+           data-desc="Application de recherche de places de parking pour étudiants à Orléans : carte interactive construite avec Leaflet.js, 16 emplacements réels référencés, backend PHP + MySQL."
+           data-thumb="thumb-park">
         <div class="work-thumb thumb-park">
           <div class="browser-bar"><span></span><span></span><span></span></div>
           <svg class="thumb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-7.4 7-13a7 7 0 1 0-14 0c0 5.6 7 13 7 13z"/><circle cx="12" cy="9" r="2.4"/></svg>
@@ -757,7 +858,12 @@
           <!-- Ajoute le lien vers le site en ligne dès qu'il est déployé -->
         </div>
       </div>
-      <div class="work-card">
+      <div class="work-card" data-lightbox
+           data-title="Portfolio développeur"
+           data-tag="Portfolio"
+           data-desc="Site personnel présentant le parcours et les projets, avec animations au scroll, compteurs de statistiques animés et un formulaire de contact intégré via Formspree."
+           data-thumb="thumb-portfolio"
+           data-link="https://portfolio-three-dusky-xwe8lndi4d.vercel.app">
         <div class="work-thumb thumb-portfolio">
           <div class="browser-bar"><span></span><span></span><span></span></div>
           <svg class="thumb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20M9 8l-2.5 2.5L9 13M15 8l2.5 2.5L15 13"/></svg>
@@ -766,7 +872,7 @@
         <div class="work-body">
           <h3>Portfolio développeur</h3>
           <p>Site personnel avec animations au scroll, compteurs animés et formulaire de contact intégré.</p>
-          <a href="https://portfolio-three-dusky-xwe8lndi4d.vercel.app" target="_blank" rel="noopener" class="work-link">Voir le site ↗</a>
+          <a href="https://portfolio-three-dusky-xwe8lndi4d.vercel.app" target="_blank" rel="noopener" class="work-link" onclick="event.stopPropagation()">Voir le site ↗</a>
         </div>
       </div>
     </div>
@@ -1104,10 +1210,29 @@
   </div>
 </section>
 
+<div class="lightbox-overlay" id="lightbox-overlay">
+  <div class="lightbox-box">
+    <div class="lightbox-visual" id="lightbox-visual">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">✕</button>
+    </div>
+    <div class="lightbox-body">
+      <span class="thumb-tag" id="lightbox-tag"></span>
+      <h3 id="lightbox-title"></h3>
+      <p id="lightbox-desc"></p>
+      <a href="#" id="lightbox-link" target="_blank" rel="noopener" class="btn btn-solid" style="display:none;">Voir le site ↗</a>
+    </div>
+  </div>
+</div>
+
 <div class="mobile-cta-bar">
   <a href="tel:+33646485208" class="call">📞 Appeler</a>
   <a href="#contact" class="quote">Devis gratuit</a>
 </div>
+
+<section class="footer-cta wrap reveal">
+  <h2>Un projet en tête ? <span class="amber-text">Discutons-en.</span></h2>
+  <a href="#contact" class="btn btn-solid">Demander un devis gratuit</a>
+</section>
 
 <footer class="wrap">
   <div class="logo"><span class="dot"></span>Lucide Studio</div>
@@ -1166,6 +1291,62 @@
     }, {threshold:0.4});
     speedObserver.observe(speedWidget);
   }
+
+  // Spotlight du hero qui suit le curseur
+  const heroSection = document.getElementById('hero-section');
+  const heroSpotlight = document.getElementById('hero-spotlight');
+  if (heroSection && window.matchMedia('(min-width: 901px)').matches){
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      heroSpotlight.style.setProperty('--mx', x + '%');
+      heroSpotlight.style.setProperty('--my', y + '%');
+    });
+  }
+
+  // Lightbox réalisations
+  const lightboxOverlay = document.getElementById('lightbox-overlay');
+  const lightboxVisual = document.getElementById('lightbox-visual');
+  const lightboxTag = document.getElementById('lightbox-tag');
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxDesc = document.getElementById('lightbox-desc');
+  const lightboxLink = document.getElementById('lightbox-link');
+
+  document.querySelectorAll('[data-lightbox]').forEach(card => {
+    card.addEventListener('click', () => {
+      lightboxTag.textContent = card.dataset.tag || '';
+      lightboxTitle.textContent = card.dataset.title || '';
+      lightboxDesc.textContent = card.dataset.desc || '';
+      lightboxVisual.className = 'lightbox-visual ' + (card.dataset.thumb || '');
+      const svgIcon = card.querySelector('.thumb-icon');
+      lightboxVisual.innerHTML = '<button class="lightbox-close" id="lightbox-close" aria-label="Fermer">✕</button>' + (svgIcon ? svgIcon.outerHTML : '');
+      document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+      if (card.dataset.link){
+        lightboxLink.href = card.dataset.link;
+        lightboxLink.style.display = 'inline-block';
+      } else {
+        lightboxLink.style.display = 'none';
+      }
+      lightboxOverlay.classList.add('open');
+    });
+  });
+  function closeLightbox(){ lightboxOverlay.classList.remove('open'); }
+  lightboxOverlay.addEventListener('click', (e) => { if (e.target === lightboxOverlay) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  // Effet tilt au survol des cartes de réalisations
+  document.querySelectorAll('.work-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(800px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  });
 
   // Compteurs animés
   const counters = document.querySelectorAll('.count-up');
