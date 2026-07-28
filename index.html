@@ -173,36 +173,21 @@
   }
   @media(max-width:900px){
     .hero-grid{grid-template-columns:1fr;}
-    .phone-mockup{display:none;}
+    .hero-image-wrap{display:none;}
   }
-  .phone-mockup{
+  .hero-image-wrap{
     justify-self:center;
-    width:230px;height:460px;
-    border:8px solid #1c1730;
-    border-radius:32px;
-    background:var(--bg-soft);
-    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
-    overflow:hidden;
     position:relative;
+    width:100%;max-width:420px;
   }
-  .phone-mockup::before{
-    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-    width:70px;height:16px;background:#1c1730;border-radius:0 0 10px 10px;z-index:2;
+  .hero-image-wrap img{
+    width:100%;display:block;border-radius:20px;
+    box-shadow:0 40px 80px -20px rgba(0,0,0,0.7);
   }
-  .phone-screen{padding:34px 14px 14px;height:100%;display:flex;flex-direction:column;gap:10px;}
-  .phone-line{height:9px;border-radius:4px;background:var(--line);}
-  .phone-line.amber{background:var(--amber);width:60%;}
-  .phone-line.w40{width:40%;}
-  .phone-line.w70{width:70%;}
-  .phone-line.w90{width:90%;}
-  .phone-card{
-    margin-top:10px;border-radius:10px;background:rgba(232,181,100,0.08);
-    border:1px solid var(--amber-dim);height:70px;
-  }
-  .phone-btn{
-    margin-top:auto;background:var(--amber);color:#181121;
-    text-align:center;font-size:0.62rem;font-weight:600;
-    border-radius:999px;padding:9px 0;font-family:'Inter',sans-serif;
+  .hero-image-wrap::after{
+    content:"";position:absolute;inset:0;border-radius:20px;
+    box-shadow:inset 0 0 0 1px rgba(232,181,100,0.15);
+    pointer-events:none;
   }
   .hero h1{
     font-size:clamp(2.4rem, 5.4vw, 4.4rem);
@@ -286,8 +271,18 @@
 
   /* ---------- FOOTER CTA ---------- */
   .footer-cta{
-    text-align:center;padding:70px 0;border-top:1px solid var(--line);
+    text-align:center;padding:80px 0;border-top:1px solid var(--line);
+    position:relative;overflow:hidden;
   }
+  .footer-cta-bg{
+    position:absolute;inset:0;z-index:0;
+    background-image:url('assets/cta-laptop.jpg');
+    background-size:cover;background-position:center;
+    opacity:0.22;
+    mask-image:linear-gradient(180deg, transparent, black 30%, black 70%, transparent);
+    -webkit-mask-image:linear-gradient(180deg, transparent, black 30%, black 70%, transparent);
+  }
+  .footer-cta > *{position:relative;z-index:1;}
   .footer-cta h2{font-size:clamp(1.6rem,3.4vw,2.2rem);margin-bottom:18px;}
   .footer-cta .btn{margin-top:6px;}
 
@@ -345,14 +340,17 @@
   }
   .service-card:hover{border-color:var(--amber-dim);transform:translateY(-4px);}
   .service-icon{
-    width:42px;height:42px;
-    border-radius:10px;
+    width:52px;height:52px;
+    border-radius:12px;
     background:var(--amber-dim);
     display:flex;align-items:center;justify-content:center;
     margin-bottom:22px;
     color:var(--amber);
     font-size:1.3rem;
+    overflow:hidden;
   }
+  .service-icon.img-icon{background:#000;}
+  .service-icon.img-icon img{width:100%;height:100%;object-fit:cover;}
   .service-card h3{font-size:1.15rem;margin-bottom:10px;font-weight:600;}
   .service-card p{color:var(--ink-dim);font-size:0.95rem;}
 
@@ -750,16 +748,8 @@
       </div>
       <p class="micro"><span>Réponse sous 24h</span> · Devis gratuit · Premier échange sans engagement</p>
     </div>
-    <div class="phone-mockup">
-      <div class="phone-screen">
-        <div class="phone-line amber w40"></div>
-        <div class="phone-line w90"></div>
-        <div class="phone-line w70"></div>
-        <div class="phone-card"></div>
-        <div class="phone-line w40"></div>
-        <div class="phone-line w70"></div>
-        <div class="phone-btn">Nous contacter</div>
-      </div>
+    <div class="hero-image-wrap">
+      <img src="assets/hero-devices.jpg" alt="Aperçu d'un site Lucide Studio affiché sur ordinateur, tablette et mobile" loading="lazy">
     </div>
   </div>
 </section>
@@ -816,17 +806,17 @@
     </div>
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-icon">🌐</div>
+        <div class="service-icon img-icon"><img src="assets/icon-site-creation.jpg" alt="" loading="lazy"></div>
         <h3>Site vitrine sur-mesure</h3>
         <p>Vos services, vos horaires, vos coordonnées — clairs, lisibles, sans texte inutile qui fait fuir.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon">📱</div>
+        <div class="service-icon img-icon"><img src="assets/icon-gear.jpg" alt="" loading="lazy"></div>
         <h3>Applications web</h3>
         <p>Réservation, prise de rendez-vous, carte interactive, back-office simple : au-delà du site vitrine.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon">🔍</div>
+        <div class="service-icon img-icon"><img src="assets/icon-magnifier.jpg" alt="" loading="lazy"></div>
         <h3>Référencement local</h3>
         <p>Un site pensé dès sa structure pour apparaître dans les recherches de votre ville.</p>
       </div>
@@ -924,7 +914,7 @@
       </div>
     </div>
     <div class="guarantee-strip">
-      <span class="icon">🛡️</span>
+      <span class="icon img-icon" style="width:34px;height:34px;border-radius:8px;display:inline-flex;flex-shrink:0;"><img src="assets/icon-shield.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></span>
       <p><strong>7 jours de retouches gratuites</strong> après la mise en ligne, si quelque chose ne vous convient pas.</p>
     </div>
   </div>
@@ -1130,6 +1120,7 @@
       </div>
     </div>
     <div class="speed-widget reveal">
+      <img src="assets/before-after.jpg" alt="Comparaison avant/après d'une refonte de site" loading="lazy" style="width:100%;border-radius:12px;margin-bottom:24px;display:block;">
       <div class="speed-row">
         <span class="speed-label">Site classique</span>
         <div class="speed-track"><div class="speed-fill slow" data-width="88"></div></div>
@@ -1246,6 +1237,7 @@
 </div>
 
 <section class="footer-cta wrap reveal">
+  <div class="footer-cta-bg"></div>
   <h2>Un projet en tête ? <span class="amber-text">Discutons-en.</span></h2>
   <a href="#contact" class="btn btn-solid">Demander un devis gratuit</a>
 </section>
